@@ -22,7 +22,7 @@ NOTE: Please read the RUN section before opening an issue.
 
 
 
-commutor is an online platform  for people who are facing to choose a driver . Here they can book for a driver and an addittional feature like car wash slot also can book for a user.instant orderdetails can display imnm this platform like pick drpo and cancel
+commutor is an online platform  for people who are facing to choose a driver . Here they can book for a driver and an addittional feature like car wash slot also can book for a user.instant orderdetails can display in this platform like pick drop and cancel
 
 
 
