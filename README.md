@@ -15,12 +15,9 @@ Driver's Hiring
 
 A  web platform to help people who needs a driver, built using React, Node js, Express js, and MongoDb.
 
-NOTE: Please read the RUN section before opening an issue.
->Warning: Serenity is still in development, constantly being optimized and isn't still stable enough to be used in production environments
 ## Demo
 
-
-
+![This is an image](/driverHiring.png)
 
 commutor is an online platform  for people who are facing to choose a driver . Here they can book for a driver and an addittional feature like car wash slot also can book for a user.instant orderdetails can display in this platform like pick drop and cancel
 
