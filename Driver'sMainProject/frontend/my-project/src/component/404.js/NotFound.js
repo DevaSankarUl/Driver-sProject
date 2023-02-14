@@ -1,8 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React,{useEffect} from 'react'
+import { Link ,useNavigate} from 'react-router-dom'
 import './NotFound.css'
 
     const PageNotFound = () => {
+		const Navigate = useNavigate()
+		useEffect(() => {
+			if (!localStorage.getItem('token')) {
+			  Navigate('/login')
+			}	
+		  })
         return (
             <div id="notfound">
 		<div className="notfound">

@@ -119,7 +119,8 @@ const Login = () => {
             <button className='w-full my-5 py-2 bg-blue-500 shadow-lg shadow-blue-500/65 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'
               type="submit">LogIn</button>
             <div className='flex  justify-center text-Blue-400 font-bold py-2'><p><Link to="/signup"> Create an account ? Register</Link></p></div>
-            <a><button className='ml-28'><Link to="/signup" className='hover:text-black px-8 py-3 pt-2  hover:bg-white bg-emerald-500 rounded-md'>SignUp</Link> </button></a>
+            <div className='flex  justify-center text-Blue-400 font-bold py-2'><p><Link to="/DriverLogin"> DriverLogin</Link></p></div>
+            {/* <a><button className='ml-28'><Link to="/signup" className='hover:text-black px-8 py-3 pt-2  hover:bg-white bg-emerald-500 rounded-md'>SignUp</Link> </button></a> */}
           </form>
         </div>
       </div>

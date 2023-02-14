@@ -53,7 +53,7 @@ function AdminLandingPage() {
             <p className="text-3xl  font-bold text-center">
               {driverCount ? driverCount : 0}
             </p>
-            <p className="text-lg  font-semibold">Drivers</p>
+            <p className="text-lg  font-semibold">Active Drivers</p>
           </div>
         </div>
 
