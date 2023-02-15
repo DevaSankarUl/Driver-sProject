@@ -42,7 +42,7 @@ const DriverForm = () => {
     },
   })
   return (
-    <div className='h-screen bg-gradient-to-b from-red-600 to-slate-800  flex justify-center items-center overflow-hidden'>
+    <div className='h-screen bg-gradient-to-b from-neutral-900 to-indigo-600  flex justify-center items-center overflow-hidden'>
       <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full '>
         <div className="hidden sm:block">
           <img className="bg-image object-cover w-full h-full" src={DriveImg}></img>
@@ -50,8 +50,8 @@ const DriverForm = () => {
         <div className="bg-black-700 text-black-700 flex flex-col justify-center">
           <form className="max-w-[400px]  w-full mx-auto  p-8 px-8   bg-gray-900 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8"
             onSubmit={handleSubmit}>
-            <h2 className='text-4xl dark:text-white font-bold text-center'>SIGNUP</h2>
-            <div className='flex flex-col text-Blue-400 font-bold py-2'>
+            <h2 className='text-4xl text-white font-bold text-center'>SIGNUP</h2>
+            <div className='flex flex-col text-white font-bold py-2'>
               <label htmlFor="">UserName</label>
               <input className='rounded-lg bg-gray-100 mt-2 p-2 focus:border-blue-500 focus:bg-white-400 focus:outline-none '
                 type="text"
@@ -65,7 +65,7 @@ const DriverForm = () => {
               {errors.name && touched.name ? (<p className='form-error text-red-500'>{errors.name}</p>) : null}
 
             </div>
-            <div className='flex flex-col text-Blue-400 font-bold py-2'>
+            <div className='flex flex-col text-white font-bold py-2'>
               <label htmlFor="">Email</label>
               <input className='rounded-lg bg-gray mt-2 p-2 focus:border-blue-500 focus:bg-white-400 focus:outline-none '
                 type="email"
@@ -78,7 +78,7 @@ const DriverForm = () => {
                 onBlur={handleBlur} />
               {errors.email && touched.email ? (<p className='form-error text-red-500'>{errors.email}</p>) : null}
             </div>
-            <div className='flex flex-col text-Blue-400 font-bold py-2'>
+            <div className='flex flex-col text-white font-bold py-2'>
               <label htmlFor="">mobileNo</label>
               <input className='rounded-lg bg-gray mt-2 p-2 focus:border-blue-500 focus:bg-white-400 focus:outline-none '
                 type="number"
@@ -91,7 +91,7 @@ const DriverForm = () => {
                 onBlur={handleBlur} />
               {errors.mobileNo && touched.mobileNo ? (<p className='form-error text-red-500'>{errors.mobileNo}</p>) : null}
             </div>
-            <div className='flex flex-col text-Blue-400 font-bold py-2'>
+            <div className='flex flex-col text-white font-bold py-2'>
               <label htmlFor="">Driving LiscenceNo</label>
               <input className='rounded-lg bg-gray mt-2 p-2 focus:border-blue-500 focus:bg-white-400 focus:outline-none '
                 type="string"
@@ -104,7 +104,7 @@ const DriverForm = () => {
                 onBlur={handleBlur} />
               {errors.LiscenceNo && touched.LiscenceNo ? (<p className='form-error text-red-500'>{errors.LiscenceNo}</p>) : null}
             </div>
-            <div className='flex flex-col text-Blue-400 font-bold py-2'>
+            <div className='flex flex-col text-white font-bold py-2'>
               <label htmlFor="">Password</label>
               <input className='rounded-lg bg-gray mt-2 p-2 focus:border-blue-500 focus:bg-white focus:outline-none'
                 type="password"
@@ -117,7 +117,7 @@ const DriverForm = () => {
                 onBlur={handleBlur} />
               {errors.password && touched.password ? (<p className='form-error text-red-500'>{errors.password}</p>) : null}
             </div>
-            <div className='flex flex-col text-Blue-400 font-bold py-2'>
+            <div className='flex flex-col text-white font-bold py-2'>
               <label htmlFor="">Confirm Password</label>
               <input className='rounded-lg bg-gray mt-2 p-2 focus:border-blue-500 focus:bg-white focus:outline-none'
                 type="password"
@@ -131,10 +131,10 @@ const DriverForm = () => {
               {errors.confirm_Password && touched.confirm_Password ? (<p className='form-error text-red-500'>{errors.confirm_Password}</p>) : null}
             </div>
             {error ? <p style={{ color: 'red' }} className="text-center">{error}</p> : ''}
-            <div className='flex justify-between text-Blue-400 font-bold py-2'>
+            {/* <div className='flex justify-between text-Blue-400 font-bold py-2'>
               <p><input type="checkbox" />Remember Me</p>
               <p> Forgot Password</p>
-            </div>
+            </div> */}
             <button className='w-full my-5 py-2 bg-blue-500 shadow-lg shadow-blue-500/65 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'
               type="submit">Signup</button>
           </form>

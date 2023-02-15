@@ -35,6 +35,7 @@ const DriverLogin=()=> {
             const res =response.data.token
             dispatch(DriverToken(res))
               navigate('/driver_profilePage')
+              toast.success("Login Successfully")
           }
           }).catch((error)=>{
             console.log(error,"this is error")
