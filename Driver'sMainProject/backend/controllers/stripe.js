@@ -22,8 +22,7 @@ console.log("typeofwash",typeofwash);
                     currency: 'inr',
                     product_data: {
                         name:  typeofwash.typeofwash.washname,
-                        // images: [plan.image],
-                        // description: plan.description,
+
                     },
                     unit_amount: typeofwash.total*100,
                 },

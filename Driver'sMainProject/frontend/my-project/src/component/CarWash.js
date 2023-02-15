@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link ,useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Navbar from './Navbar/UserNavbar'
 import bgImg from '../assets/car wash.jpg'
 import card from '../assets/3M_Exterior_Shampoo_9WKaAQSHTy.webp'
 import card2 from '../assets/card2.jpg'
 function CarWash() {
- 
+
     return (
         <>
             <div><Navbar /></div>
@@ -44,19 +44,19 @@ function CarWash() {
                         </div>
                     </div>
                     <div className="relative  text-white">
-                    <Link to ='/carwashBook'>
-                        <img className="md:w-[400px] md:h-80 w-44 h-44 border-solid border-2 border-black content-between rounded-2xl m-10"  src={card2}></img>
-                        <div className='uppercase font-bold absolute sm:top-20 md:left-32 top-1 left-14'>
-                            <span>Gold Glass Car wash</span>
-                        </div>
+                        <Link to='/carwashBook'>
+                            <img className="md:w-[400px] md:h-80 w-44 h-44 border-solid border-2 border-black content-between rounded-2xl m-10" src={card2}></img>
+                            <div className='uppercase font-bold absolute sm:top-20 md:left-32 top-1 left-14'>
+                                <span>Gold Glass Car wash</span>
+                            </div>
                         </Link>
                     </div>
                     <div className="relative">
-                    <Link to ='/carwashBook'>    
-                        <img className="md:w-[400px] md:h-80 w-44 h-44 border-solid border-2 border-black content-between rounded-2xl m-10" src={card}></img>
-                        <div className='uppercase font-bold absolute sm:top-20 md:left-32 top-1 left-14'>
-                            <span>Professional driver</span>
-                        </div>
+                        <Link to='/carwashBook'>
+                            <img className="md:w-[400px] md:h-80 w-44 h-44 border-solid border-2 border-black content-between rounded-2xl m-10" src={card}></img>
+                            <div className='uppercase font-bold absolute sm:top-20 md:left-32 top-1 left-14'>
+                                <span>Professional driver</span>
+                            </div>
                         </Link>
                     </div>
                 </div>
@@ -66,13 +66,13 @@ function CarWash() {
                 </div>
             </div>
             <div>
-            <div className="font-bold text-3xl text-center p-10">
-              <span class='block'>We clean  professionally interior and exterio your car </span>
-              <span class="block">at your finger Tips .</span>
-              <button> <Link to ='/carwashBook' className='w-[160px] my-5 py-2 bg-black shadow-lg shadow-blue-500/65 hover:shadow-teal-500/40 text-white font-semibold '
-      type="submit">Book Now !</Link></button>
-              </div>
-            </div> 
+                <div className="font-bold text-3xl text-center p-10">
+                    <span class='block'>We clean  professionally interior and exterio your car </span>
+                    <span class="block">at your finger Tips .</span>
+                    <button> <Link to='/carwashBook' className='w-[160px] my-5 py-2 bg-black shadow-lg shadow-blue-500/65 hover:shadow-teal-500/40 text-white font-semibold '
+                        type="submit">Book Now !</Link></button>
+                </div>
+            </div>
         </>
     )
 }

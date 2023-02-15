@@ -1,7 +1,7 @@
 const Driver = require('../models/driverModel')
 const pickAndDrop = require('../models/pickAndDrop')
 const jwt = require('jsonwebtoken')
-// const token
+
 
 
 const SignupDriver = async (req, res) => {
@@ -9,17 +9,17 @@ const SignupDriver = async (req, res) => {
 
 
     const drive = req.body.values
-    // console.log(drive);
+
     try {
 
         const driverData = await Driver.findOne({ email: email || mobileNo })
         if (driverData) {
-            // console.log(driverData);
+
             data = "Email Already Exists"
             res.json({ mssg: data })
 
         } else {
-            const driverDatas = await Driver.create({ name, email, mobileNo, LiscenceNo, password ,blockStatus:false})
+            const driverDatas = await Driver.create({ name, email, mobileNo, LiscenceNo, password, blockStatus: false })
             res.status(200).json({ status: "Email Created " })
             console.log("Driver Signup Success");
         }
@@ -33,15 +33,15 @@ const loginDriver = async (req, res) => {
         driverLog: false,
         passErr: false,
         invalidDriver: false,
-        blockStatus:false
+        blockStatus: false
     }
 
     const DriverLogin = req.body.values
     console.log(DriverLogin)
     try {
-        const driverValidation = await Driver.findOne({ email: DriverLogin.email,blockStatus:false })
-        if(!driverValidation){
-            res.status(400).json({message:"You are banned"})
+        const driverValidation = await Driver.findOne({ email: DriverLogin.email, blockStatus: false })
+        if (!driverValidation) {
+            res.status(400).json({ message: "You are banned" })
         }
         if (driverValidation) {
             if (driverValidation.password === DriverLogin.password) {
@@ -60,13 +60,13 @@ const loginDriver = async (req, res) => {
                 res.json({ data: errMessage })
             }
         }
-        // else {
-        //     validation.invalidDriver = true || validation.blockStatus == true
-        //     let errMessage = "Invalid User"
-        //     res.json({ status: "No Such User Exists", data: errMessage })
-        // }
+        else {
+            validation.invalidDriver = true || validation.blockStatus == true
+            let errMessage = "Invalid User"
+            res.json({ status: "No Such User Exists", data: errMessage })
+        }
     } catch (error) {
-        res.status(500).json({ error: error.message })  
+        res.status(500).json({ error: error.message })
     }
 }
 const DriverProfile = async (req, res) => {
@@ -85,7 +85,7 @@ const DriverProfile = async (req, res) => {
 }
 const changeProfilePhoto = async (req, res) => {
     try {
-        // console.log(req.body)
+
         const imageUrl = req.body.url
         console.log("imageUrl", imageUrl);
         const user = req.body.email.email.email
@@ -120,16 +120,16 @@ const pick = async (req, res) => {
         return res.status(500).json({ mssg: err.message })
     }
 }
-const drop =async(req,res)=>{
-    const id= req.params.id;
-    console.log("drop id",id);
-    try{
-        if(id){
-            const user = await pickAndDrop.findOneAndUpdate({_id:id},{status:'success'})
-            
+const drop = async (req, res) => {
+    const id = req.params.id;
+    console.log("drop id", id);
+    try {
+        if (id) {
+            const user = await pickAndDrop.findOneAndUpdate({ _id: id }, { status: 'success' })
+
             return res.json({ mssg: "user Droped" });
         }
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
 }

@@ -11,10 +11,7 @@ function AdminCarWashForm() {
     const [previewSource4, setPreviewSource4] = useState();
     const [fileInputState, setFileInputState] = useState('');
     const [error, setError] = useState('')
-    // const navigate=useNavigate();
-
-
-    // const { register, handleSubmit, reset } = useForm()
+   
 
     console.log("hey val", val);
     const handleFileInputChange1 = (e) => {

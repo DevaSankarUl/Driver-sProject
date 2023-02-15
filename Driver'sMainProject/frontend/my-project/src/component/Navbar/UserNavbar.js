@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearExpertLoginDetails, clearUserLoginDetails, clearUserToken } from "../Redux/adminReducer";
 import { toast } from 'react-toastify';
@@ -8,7 +8,7 @@ function Nav() {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
   const Navigate = useNavigate()
- 
+
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       Navigate('/login')
@@ -42,8 +42,8 @@ function Nav() {
                 // localStorage.removeItem('token')
                 dispatch(clearUserToken())
                 dispatch(clearExpertLoginDetails())
-                    dispatch(clearUserLoginDetails())
-                    
+                dispatch(clearUserLoginDetails())
+
               }}><Link to="/login" className='hover:text-white px-12 py-3 bg-red-400 rounded-md ml-10 font-bold flex justify-end' >Logout</Link></button>
 
             </div>
@@ -117,19 +117,19 @@ function Nav() {
                 {/* <a><Link to="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> For services</Link></a> */}
                 <a><Link to="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Carwash</Link></a>
                 <a><Link to="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> For Drivers</Link></a>
-                <a>   <button 
+                <a>   <button
                   onClick={() => {
-                    
+
                     localStorage.removeItem('token')
                     dispatch(clearUserToken())
                     // dispatch(clearExpertLoginDetails())
                     // dispatch(clearUserLoginDetails())
-                    
+
                   }}>
-                  <Link to="/login" 
-                 
-                  className='hover:text-white px-8 py-3 hover:bg-blue-700 bg-red-400 rounded-md ml-10 font-bold'>Logout</Link></button></a>
-                   
+                  <Link to="/login"
+
+                    className='hover:text-white px-8 py-3 hover:bg-blue-700 bg-red-400 rounded-md ml-10 font-bold'>Logout</Link></button></a>
+
               </div>
             </div>
           )}

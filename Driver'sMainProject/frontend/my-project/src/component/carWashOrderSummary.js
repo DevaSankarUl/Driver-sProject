@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 const localUser = localStorage.getItem('token')
 // console.log("local storage user is: ", localUser);
 const Payment = () => {
-//     useEffect(() => {
+    //     useEffect(() => {
 
-//     }, [])
-    
+    //     }, [])
+
     const users = useSelector((state) => state.admin.userDetails)
     console.log(users);
     const location = useLocation()
@@ -24,18 +24,18 @@ const Payment = () => {
     console.log(total);
     const handleCheckout = async (req, res) => {
         const response = await axiosUserInstance.post('/create-checkout-session', {
-            
+
             typeofwash,
             total,
             userId: users
-         
+
         })
-        .then((res) => {
-            console.log("payment", res);
-            if (res.data.url) {
-                window.location.href = res.data.url
-            }
-        })
+            .then((res) => {
+                console.log("payment", res);
+                if (res.data.url) {
+                    window.location.href = res.data.url
+                }
+            })
             .catch((err) => console.log(err.message));
     }
 
@@ -66,7 +66,7 @@ const Payment = () => {
                                     </p>
                                     <p className="text-base leading-4 text-gray-600">{tax}</p>
                                 </div>
-                             
+
                             </div>
                             <div className="flex justify-between items-center w-full">
                                 <p className="text-base font-semibold leading-4 text-gray-800">Total</p>

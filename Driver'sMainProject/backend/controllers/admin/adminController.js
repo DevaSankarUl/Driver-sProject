@@ -1,7 +1,6 @@
-// const { Admin } = require('mongodb')
+
 const admin = require('../../models/adminModel')
 const User = require('../../models/userModel')
-// const Product = require('../../models/adminProduct')
 const adminHelpers = require('../../Heplers/adminHeplers')
 const product = require('../../app')
 const jwt = require('jsonwebtoken')
@@ -33,8 +32,7 @@ const adminLogin = async (req, res) => {
             } else {
                 console.log("Password Incorrect");
                 adminValidation.passErr = true
-                // let errMessage ="password Incorrect"
-                // console.log("password Incorrect");
+
                 res.json({ status: "passwordWrong" })
             }
         } else if (!adminValidation) {
@@ -59,13 +57,13 @@ const userInfo = async (req, res) => {
 }
 
 const blockUser = async (req, res) => {
-    // console.log('gggg');
+
     const id = req.params.id;
     console.log(req.params.id)
     try {
         if (id) {
             const user = await User.findByIdAndUpdate({ _id: id }, { blockStatus: true })
-            // console.log('succes');
+
             err.Message = "you were Blocked"
             res.json({ mssg: "you were Blocked", details: user })
         } else {
@@ -89,24 +87,23 @@ const unblockUser = async (req, res) => {
         return res.status(500).json({ mssg: err.message })
     }
 }
-const allDrivers= async(req,res)=>{
+const allDrivers = async (req, res) => {
     const info = await Driver.find()
-    
-    if(info){
-        return  res.json({mssg:"got all drivers",details:info})
-    }else{
-        return res.json({mssg:'No Data'})
+
+    if (info) {
+        return res.json({ mssg: "got all drivers", details: info })
+    } else {
+        return res.json({ mssg: 'No Data' })
     }
 }
 const blockDriver = async (req, res) => {
     console.log('gggg');
     const id = req.params.id;
-    console.log("ithanu put",req.params.id)
+    console.log("ithanu put", req.params.id)
     try {
-        if (id) { 
-            const user = await Driver.findByIdAndUpdate({ _id: id }, { blockStatus:true })
+        if (id) {
+            const user = await Driver.findByIdAndUpdate({ _id: id }, { blockStatus: true })
             console.log('succes');
-            // err.Message = "you were Blocked"
             res.json({ mssg: "you were Blocked", details: user })
         } else {
             return res.status(400).json({ errMssg: "Your were Blocked" })
@@ -119,13 +116,13 @@ const blockDriver = async (req, res) => {
 const UnblockDriver = async (req, res) => {
     console.log('kope');
     const id = req.params.id;
-    console.log("ithanu put",req.params.id)
+    console.log("ithanu put", req.params.id)
     try {
         if (id) {
-            const user = await Driver.findOneAndUpdate({ _id: id },{blockStatus:false})
+            const user = await Driver.findOneAndUpdate({ _id: id }, { blockStatus: false })
             console.log('user');
-           
-           return  res.json({ mssg: "you were Blocked", details: user })
+
+            return res.json({ mssg: "you were Blocked", details: user })
         } else {
             return res.status(400).json({ errMssg: "Not Updated" })
         }
@@ -134,50 +131,50 @@ const UnblockDriver = async (req, res) => {
         return res.status(500).json({ mssg: err.message })
     }
 }
-const driverApprovel= async(req, res) => {
+const driverApprovel = async (req, res) => {
     await Driver.findByIdAndUpdate(req.params.id, { approved: true }, (err, driver) => {
-       if (err) {
-         return res.status(500).send(err);
-       }
-   
-       return res.status(200).send({ success: true });
-     });
-   };
-   
-   // Reject a driver
- const driverRejection =async (req, res) => {
-     Driver.findByIdAndUpdate(req.params.id, { approved: false }, (err, driver) => {
-       if (err) {
-         return res.status(500).send(err);
-       }
-   
-       return res.status(200).send({ success: true });
-     });
-   };
- 
-const getDriverCount=async(req,res)=>{
-    await Driver.find({blockStatus:false}).count()
-    .then((response)=>{
-        res.json({response}).status(200)
-    })
-    .catch((err)=>{
-        console.log(err).status(400)
-    })
+        if (err) {
+            return res.status(500).send(err);
+        }
+
+        return res.status(200).send({ success: true });
+    });
+};
+
+// Reject a driver
+const driverRejection = async (req, res) => {
+    Driver.findByIdAndUpdate(req.params.id, { approved: false }, (err, driver) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+
+        return res.status(200).send({ success: true });
+    });
+};
+
+const getDriverCount = async (req, res) => {
+    await Driver.find({ blockStatus: false }).count()
+        .then((response) => {
+            res.json({ response }).status(200)
+        })
+        .catch((err) => {
+            console.log(err).status(400)
+        })
 }
-const ordersCount=async(req,res)=>{
+const ordersCount = async (req, res) => {
     await pickAndDrop.find({}).count()
-    .then((response)=>{
-        res.json({response}).status(200)
-    })
-.catch((err)=>{
-console.log(err);
-})
+        .then((response) => {
+            res.json({ response }).status(200)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
-const usersCount = async(req,res)=>{
-    await User.find({blockStatus:false}).count()
-    .then((response)=>{
-        res.json({response}).status(200)
-    })
+const usersCount = async (req, res) => {
+    await User.find({ blockStatus: false }).count()
+        .then((response) => {
+            res.json({ response }).status(200)
+        })
 }
 
 const adminCarWash = (req, res) => {
@@ -185,15 +182,7 @@ const adminCarWash = (req, res) => {
     console.log(product);
     adminHelpers.adminCarWash(product)
 
-    // .then((response)=>{
 
-    // })
-    // console.log("carwashpari",product);
-    // const productData = new Product({
-    //     washname:productData.carwash.input.name,
-    //     price:productData.carwash.value.price
-
-    // })
 }
 const pickDetails = async (req, res) => {
     try {
@@ -218,10 +207,6 @@ const multipleimage = async (req, res) => {
             upload_preset: 'aqhb3bms',
         });
 
-        //   const files =  Product.create(req.body.data)
-        //   if(files){
-        //    console.log(files);
-        //   }
 
         return res.json({ status: 'ok', imageData: uploadedResponse });
 
@@ -247,16 +232,16 @@ module.exports = {
     blockUser,
     unblockUser,
     adminCarWash,
-    pickDetails,   
+    pickDetails,
     multipleimage,
     insertValues,
     getDriverCount,
-     driverApprovel,
-      driverRejection,
-     ordersCount,
-     allDrivers,
-     blockDriver,
-     UnblockDriver,
-     usersCount
+    driverApprovel,
+    driverRejection,
+    ordersCount,
+    allDrivers,
+    blockDriver,
+    UnblockDriver,
+    usersCount
 }
 

@@ -9,10 +9,10 @@ import jwt_decode from "jwt-decode";
 import { useDispatch } from 'react-redux'
 import { expertDetails } from './Redux/adminReducer'
 function DriverProfilePage() {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const [ImageSelcted, setImageSelected] = useState()
   const [profilePhoto, setProfilePhoto] = useState('')
-  // console.log("profilePhoto", profilePhoto);
+
 
   const navigate = useNavigate()
   const expertEmail = localStorage.getItem("Drivertoken")
@@ -26,19 +26,16 @@ function DriverProfilePage() {
       .then(async (response) => {
         // console.log(response);
         const decoded = jwt_decode(expertEmail);
-        // console.log(decoded);
-        // console.log(decoded.email.email);
-        // console.log("response is : ", response)
-        const url = response.data.url 
+
+        const url = response.data.url
         // console.log(url);
 
         const res = await axiosDriverInstance.post('/photo-change', { url, email: decoded })
         profile()
-        
-        // console.log("photochange before re", res);
+
       })
 
-    // console.log("files uploaded are : ", imageSelected);
+
   }
   const profile = async () => {
     const decoded = jwt_decode(expertEmail);
@@ -46,7 +43,7 @@ function DriverProfilePage() {
     const changeImage = await axiosDriverInstance.post('/getDriver', { email: decoded })
     // console.log("res after chanssssge :", changeImage)
     const expert = changeImage.data.driver
-   
+
     // console.log("profilepicChange", expert);
     setProfilePhoto(expert)
     dispatch(expertDetails(expert))
@@ -121,17 +118,17 @@ function DriverProfilePage() {
                 </div>
               </div>
               <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-        <div className="flex flex-wrap justify-center">
-          <div className="w-full lg:w-9/12 px-4">
-            <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-              {profilePhoto.mobileNo}
-            </p>
-            <a href="javascript:void(0);" className="font-normal text-pink-500">
-              Show more
-            </a>
-          </div>
-        </div>
-      </div>
+                <div className="flex flex-wrap justify-center">
+                  <div className="w-full lg:w-9/12 px-4">
+                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                      {profilePhoto.mobileNo}
+                    </p>
+                    <a href="javascript:void(0);" className="font-normal text-pink-500">
+                      Show more
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import {axiosDriverInstance} from  '../Axios/Axios'
+import { axiosDriverInstance } from '../Axios/Axios'
 import DriveImg from '../assets/DriverPage.jpg'
-import {Link,useNavigate} from 'react-router-dom'
-import {  useFormik } from 'formik'
+import { Link, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
 import { DriverSchema } from '../validation/DriverSignup'
 const initialValues = {
   name: "",
@@ -23,22 +23,22 @@ const DriverForm = () => {
       // console.log(values);
       const response = await axiosDriverInstance.post('/signupDriver', {
         values
-       
-      })
-      
-      .then((response)=>{
-        console.log(response);
-        // console.log(response.data.mssg);
-        if (response.data.mssg === "Email Already Exists") {
-        setError(response.data.mssg)
-      }else{
-      
-        navigate('/DriverLogin')
-      }
-      action.resetForm();
+
       })
 
-   
+        .then((response) => {
+          console.log(response);
+          // console.log(response.data.mssg);
+          if (response.data.mssg === "Email Already Exists") {
+            setError(response.data.mssg)
+          } else {
+
+            navigate('/DriverLogin')
+          }
+          action.resetForm();
+        })
+
+
     },
   })
   return (
@@ -131,10 +131,7 @@ const DriverForm = () => {
               {errors.confirm_Password && touched.confirm_Password ? (<p className='form-error text-red-500'>{errors.confirm_Password}</p>) : null}
             </div>
             {error ? <p style={{ color: 'red' }} className="text-center">{error}</p> : ''}
-            {/* <div className='flex justify-between text-Blue-400 font-bold py-2'>
-              <p><input type="checkbox" />Remember Me</p>
-              <p> Forgot Password</p>
-            </div> */}
+
             <button className='w-full my-5 py-2 bg-blue-500 shadow-lg shadow-blue-500/65 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'
               type="submit">Signup</button>
           </form>

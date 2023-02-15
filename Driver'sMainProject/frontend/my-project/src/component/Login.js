@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import bgImg from '../assets/drivers.jpeg' 
+import bgImg from '../assets/drivers.jpeg'
 import { useNavigate, Link } from 'react-router-dom'
 import { useFormik } from "formik"
 import { userLoginSchema } from '../validation/useLoginSchema'
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { userToken } from './Redux/adminReducer'
 import { userLoginDetails } from './Redux/adminReducer'
 import { toast } from 'react-toastify';
@@ -17,7 +17,7 @@ const initialValues = {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const user = useSelector ((state)=>state.admin.userToken)  
+  const user = useSelector((state) => state.admin.userToken)
   const [validation, setValidation] = useState('')
 
   let navigate = useNavigate()
@@ -31,15 +31,15 @@ const Login = () => {
         method: "POST",
         body: JSON.stringify(values),
         headers: { "Content-Type": 'application/json' },
-        Authorization:user
+        Authorization: user
       }
       )
         // const json = await response.json()
         .then((res) => res.json())
-      
+
         .then((data) => {
           console.log(data);
-           if (data.data === "Logged in") {
+          if (data.data === "Logged in") {
             localStorage.setItem('token', data.token)
             dispatch(userToken(data.token))
             navigate('/')
@@ -47,7 +47,7 @@ const Login = () => {
 
             console.log(data.token);
           }
-          else if(data.error === "you were Blocked"){
+          else if (data.error === "you were Blocked") {
             console.log(data.data);
             setValidation(data.data)
             console.log(data.data);
@@ -57,10 +57,10 @@ const Login = () => {
 
           } else if (data.data === "Invalid User") {
             setValidation(data.status)
-            
+
           }
-          
-         dispatch(userLoginDetails(values))
+
+          dispatch(userLoginDetails(values))
         })
       action.resetForm();
     },
@@ -69,14 +69,14 @@ const Login = () => {
 
   return (
     <div className='bg bg-slate-200 h-screen bg-gradient-to-r  flex justify-center items-center overflow-hidden'>
-    <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full '>
-      <div className="hidden sm:block">
-        <img className="bg-image object-cover w-full h-full p-48" src={bgImg}></img>
-      </div>
+      <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full '>
+        <div className="hidden sm:block">
+          <img className="bg-image object-cover w-full h-full p-48" src={bgImg}></img>
+        </div>
         <div className="bg-slate-200 text-blue-600 flex flex-col justify-center">
           <form className="max-w-[400px]  w-full mx-auto bg-opacity-50 p-8 px-8 rounded-lg"
-          
-            onSubmit={handleSubmit}>  
+
+            onSubmit={handleSubmit}>
             <h2 className='text-4xl dark:text-white font-bold text-center'>LOGIN</h2>
 
             <div className='flex flex-col text-Blue-400 font-bold py-2  '>
@@ -112,20 +112,15 @@ const Login = () => {
 
             </div>
 
-            {/* <div className='flex justify-between text-Blue-400 font-bold py-2'>
-              <p><input type="checkbox" />Remember Me</p>
-              <p> Forgot Password</p>
-            </div> */}
             <button className='w-full my-5 py-2 bg-blue-500 shadow-lg shadow-blue-500/65 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'
               type="submit">LogIn</button>
             <div className='flex  justify-center text-Blue-400 font-bold py-2'><p><Link to="/signup"> Create an account ? Register</Link></p></div>
             <div className='flex  justify-center text-Blue-400 font-bold py-2'><p><Link to="/DriverLogin"> DriverLogin</Link></p></div>
-            {/* <a><button className='ml-28'><Link to="/signup" className='hover:text-black px-8 py-3 pt-2  hover:bg-white bg-emerald-500 rounded-md'>SignUp</Link> </button></a> */}
           </form>
         </div>
       </div>
-    
-    </div>  
+
+    </div>
   )
 }
 

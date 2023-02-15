@@ -67,7 +67,7 @@ const loginUser = async (req, res) => {
 
 
 }
-const   getUser = async (req, res) => {
+const getUser = async (req, res) => {
     const id = req.params.id
     try {
         const details = await User.findById({ _id: id })
@@ -141,15 +141,15 @@ const orderData = async (req, res) => {
         console.log("email kop", email.userid);
         // const order = Order.findOne()
     } catch (err) {
-console.log(err);
+        console.log(err);
     }
 }
 
 const payment = async (req, res) => {
     try {
-        res.status(200).json({success})
+        res.status(200).json({ success })
     } catch (err) {
-res.status(400).json({err});
+        res.status(400).json({ err });
     }
 }
 const chat = async (req, res) => {
@@ -201,7 +201,7 @@ const access = async (req, res) => {
         var chatData = {
             chatName: 'sender',
             isGroupChat: false,
-            users: [req.user._id,userId]
+            users: [req.user._id, userId]
         }
         try {
             const createdchat = await Chat.create(chatData)

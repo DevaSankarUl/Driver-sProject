@@ -25,10 +25,10 @@ function CarwashBook() {
     const user = await axiosUserInstance.get(`/userDetail/${userId}`)
   }
   const carwash = async () => {
-    const displayproduct = await axiosUserInstance.post('/getProduct',{
-      headers:{'content-Type':'application/json'},
-      Authorization:userId,
-      Accept:'application/json'
+    const displayproduct = await axiosUserInstance.post('/getProduct', {
+      headers: { 'content-Type': 'application/json' },
+      Authorization: userId,
+      Accept: 'application/json'
     })
     const getProduct = displayproduct.data.data
     setProducts(getProduct)
@@ -101,13 +101,7 @@ function CarwashBook() {
                     <span>{product.materials[3]}</span>
                   </div>
                 </div>
-                {/* <div className="relative">
 
-                  <img className="md:w-[400px] md:h-80 w-44 h-44  border-black content-evenly rounded-md m-10" src={product.fourthImage} />
-                  <div className='uppercase font-bold absolute xm:top-20 md:left-48 top-5 left-20'>
-                    <span>Car Wash</span>
-                  </div>
-                </div> */}
               </div>
             </div>
           )

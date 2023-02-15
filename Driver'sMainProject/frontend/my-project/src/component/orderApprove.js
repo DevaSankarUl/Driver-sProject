@@ -12,18 +12,18 @@ const OrderDetail = () => {
   // const [general, setGeneral] = useState('pick');
   const [approvel, setapprovel] = useState([])
 
-  console.log( approvel);
+  console.log(approvel);
 
   const displaydriver = async () => {
     const config = {
-      headers:{
-        Accept:'application/josn',
-        Authorization:expertEmail,
-        'Content-Type':'application-json'
+      headers: {
+        Accept: 'application/josn',
+        Authorization: expertEmail,
+        'Content-Type': 'application-json'
       }
     }
     try {
-      const res = await axiosDriverInstance.get('/pickDetails',config)
+      const res = await axiosDriverInstance.get('/pickDetails', config)
       setapprovel(res.data.getpick);
       //  setapprovel=res.data
       dispatch(userpickAndDropDetails(res.data))
@@ -45,9 +45,9 @@ const OrderDetail = () => {
     if (data) {
       displaydriver()
     }
-  
+
   }
-  async function  drop(id){
+  async function drop(id) {
     const driver = localStorage.getItem('Drivertoken');
     const config = {
       headers: {
@@ -56,12 +56,12 @@ const OrderDetail = () => {
         'Content-Type': 'application/json'
       }
     }
-    const data =await axiosDriverInstance.post(`drop/${id}`,config)
-    if(data){
+    const data = await axiosDriverInstance.post(`drop/${id}`, config)
+    if (data) {
       displaydriver()
     }
   }
-  async function  success(id){
+  async function success(id) {
     const token = localStorage.getItem('adminToken');
     const config = {
       headers: {
@@ -70,12 +70,12 @@ const OrderDetail = () => {
         'Content-Type': 'application/json'
       }
     }
-    const data =await axiosDriverInstance.post(`success/${id}`,config)
-    if(data){
+    const data = await axiosDriverInstance.post(`success/${id}`, config)
+    if (data) {
       displaydriver()
     }
   }
-  
+
 
   async function deleteData(id) {
     const token = localStorage.getItem('Drivertoken');
@@ -123,21 +123,21 @@ const OrderDetail = () => {
           <div>
             {row.status == 'pick' ? (
 
-<button
-  className="p-4 ml-4 text-black bg-cyan-600 rounded font-semibold cursor-pointer hover:bg-cyan-900"
-  onClick={() => pick(row._id)}
->
-  Pick
-</button>
-) : (
-<button
-  className="p-4 ml-4 text-black bg-lightGreen rounded font-semibold cursor-pointer bg-green-800"
-// onClick={() => setGeneral(1)}
-onClick={()=>drop(row._id)}
->
-  Drop
-</button>
-)}
+              <button
+                className="p-4 ml-4 text-black bg-cyan-600 rounded font-semibold cursor-pointer hover:bg-cyan-900"
+                onClick={() => pick(row._id)}
+              >
+                Pick
+              </button>
+            ) : (
+              <button
+                className="p-4 ml-4 text-black bg-lightGreen rounded font-semibold cursor-pointer bg-green-800"
+                // onClick={() => setGeneral(1)}
+                onClick={() => drop(row._id)}
+              >
+                Drop
+              </button>
+            )}
           </div>
         )
       },
@@ -155,12 +155,12 @@ onClick={()=>drop(row._id)}
               </button>
             ) : (
               <div>
-<button
-              onClick={()=>success(row._id)}
-             className="p-4 ml-4 text-black bg-lightGreen rounded font-semibold cursor-pointer bg-green-400">
-              success
-            </button>
-                
+                <button
+                  onClick={() => success(row._id)}
+                  className="p-4 ml-4 text-black bg-lightGreen rounded font-semibold cursor-pointer bg-green-400">
+                  success
+                </button>
+
               </div>
             )}
           </div>
@@ -174,8 +174,8 @@ onClick={()=>drop(row._id)}
 
 
   return (
-  <DataTable columns={columns} data={approvel}
-    pagination />)
+    <DataTable columns={columns} data={approvel}
+      pagination />)
 }
 
 export default OrderDetail;

@@ -3,7 +3,7 @@ import DataTable from 'react-data-table-component'
 import { useDispatch } from "react-redux";
 import { axiosAdminInstance } from "../Axios/Axios";
 import { userpickAndDropDetails } from "./Redux/adminReducer";
-const OrderDetail = ({data}) => {
+const OrderDetail = ({ data }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     displaydriver()
@@ -13,7 +13,7 @@ const OrderDetail = ({data}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(data);
 
-  console.log( approvel);
+  console.log(approvel);
 
   const displaydriver = async () => {
     try {
@@ -88,8 +88,8 @@ const OrderDetail = ({data}) => {
       selector: (row) => row.date
     },
     {
-    name:"Status",
-    selector:(row)=>row.status
+      name: "Status",
+      selector: (row) => row.status
     }
 
 
