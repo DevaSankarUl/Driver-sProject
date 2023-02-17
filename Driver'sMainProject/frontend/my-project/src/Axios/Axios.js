@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 export const  axiosUserInstance = axios.create({
-  baseURL:'http://localhost:4000/api/user'
+  baseURL:'/api/user'
 })
 export const axiosAdminInstance = axios.create({
-    baseURL:'http://localhost:4000/api/admin'
+    baseURL:'/api/admin'
 })
 export const axiosDriverInstance = axios.create({
-  baseURL:'http://localhost:4000/api/Driver'
+  baseURL:'/api/Driver'
 })

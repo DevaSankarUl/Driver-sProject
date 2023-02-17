@@ -1,7 +1,7 @@
 const Driver = require('../models/driverModel')
 const pickAndDrop = require('../models/pickAndDrop')
 const jwt = require('jsonwebtoken')
-
+// const token
 
 
 const SignupDriver = async (req, res) => {
@@ -9,12 +9,12 @@ const SignupDriver = async (req, res) => {
 
 
     const drive = req.body.values
-
+    // console.log(drive);
     try {
 
         const driverData = await Driver.findOne({ email: email || mobileNo })
         if (driverData) {
-
+            // console.log(driverData);
             data = "Email Already Exists"
             res.json({ mssg: data })
 
@@ -40,9 +40,9 @@ const loginDriver = async (req, res) => {
     console.log(DriverLogin)
     try {
         const driverValidation = await Driver.findOne({ email: DriverLogin.email, blockStatus: false })
-        if (!driverValidation) {
-            res.status(400).json({ message: "You are banned" })
-        }
+        // if(!driverValidation){
+        //     res.status(400).json({message:"You are banned"})
+        // }
         if (driverValidation) {
             if (driverValidation.password === DriverLogin.password) {
                 validation.driverLog = true
@@ -57,23 +57,22 @@ const loginDriver = async (req, res) => {
             } if (driverValidation.password != DriverLogin.password) {
                 validation.passErr = true
                 let errMessage = "password Incorrect"
-                res.json({ data: errMessage })
+                res.status(400).json({ data: errMessage })
             }
         }
         else {
             validation.invalidDriver = true || validation.blockStatus == true
             let errMessage = "Invalid User"
-            res.json({ status: "No Such User Exists", data: errMessage })
+            res.status(400).json({ status: "No Such User Exists", data: errMessage })
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
 }
 const DriverProfile = async (req, res) => {
-    const email = req.body.email.email
-    console.log("helloooooooo", email);
+    const email = req.driver.email
     try {
-        const response = await Driver.findOne({ email: email.email })
+        const response = await Driver.findOne({ email: email })
         const driver = response
         console.log("response  is : ", driver);
 
@@ -112,7 +111,7 @@ const pick = async (req, res) => {
         if (id) {
             const user = await pickAndDrop.findOneAndUpdate({ _id: id }, { status: 'drop' })
             console.log(id);
-            return res.json({ mssg: "user Droped" });
+            return res.json({ mssg: "user picked" });
         } else {
             return res.status(400).json({ mssg: "Not Updated" })
         }

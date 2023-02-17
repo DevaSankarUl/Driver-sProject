@@ -17,12 +17,12 @@ function HomePage() {
       console.log(user,'red use');
       dispatch(userLoginDetails(user));
       if (user) {
-        navigate('/');
+        navigate('/home');
       } else {
-        navigate('/login');
+        navigate('/');
       }
     } else {
-      navigate('/login');
+      navigate('/');
     }
   }, [navigate, dispatch]);
   return (

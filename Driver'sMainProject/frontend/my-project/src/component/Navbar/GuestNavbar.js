@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { clearUserLoginDetails, clearUserToken } from "../Redux/adminReducer";
 
 function Nav() {
-  const dispatch = useDispatch()
+
   const [isOpen, setIsOpen] = useState(false);
   const Navigate = useNavigate()
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
-      Navigate('/login')
+      Navigate('/' || '/login')
+
     }
-  })
+  }, [])
   return (
     <div>
 
@@ -36,13 +35,9 @@ function Nav() {
             </div>
           </div>
           <div className='hidden md:flex pl-40 '>
-
             <button onClick={() => {
-              localStorage.removeItem('token')
-              dispatch(clearUserToken())
-              dispatch(clearUserLoginDetails())
 
-            }}><Link to="/login" className='hover:text-white px-12 py-3 bg-red-400 rounded-md ml-10 font-bold flex justify-end' >Logout</Link></button>
+            }}><Link to="/home" className='hover:text-white px-5 py-3 bg-red-400 rounded-md ml-10 font-bold flex justify-end' >Login/Signup</Link></button>
 
           </div>
 
@@ -106,17 +101,14 @@ function Nav() {
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
 
-                <a><Link to="/home" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Home</Link></a>
 
-                <a><Link to="/carwash" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Carwash</Link></a>
-                <a><Link to="/DriverLogin" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> For Drivers</Link></a>
+                <a><Link to="/home" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Home</Link></a>
+                <a><Link to="/DriverLogin" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> Carwash</Link></a>
+                <a><Link to="/carwash" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"> For Drivers</Link></a>
                 <a>   <button
                   onClick={() => {
 
-                    localStorage.removeItem('token')
-                    dispatch(clearUserToken())
-                    // dispatch(clearExpertLoginDetails())
-                    dispatch(clearUserLoginDetails())
+
 
                   }}>
                   <Link to="/login"

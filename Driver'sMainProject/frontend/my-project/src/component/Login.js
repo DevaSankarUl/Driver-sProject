@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { userToken } from './Redux/adminReducer'
 import { userLoginDetails } from './Redux/adminReducer'
 import { toast } from 'react-toastify';
-
+import { axiosUserInstance } from '../Axios/Axios'
 
 const initialValues = {
   email: "",
@@ -27,40 +27,34 @@ const Login = () => {
     onSubmit: async (values, action) => {
       // console.log(values);
 
-      const res = await fetch('http://localhost:4000/api/user/login', {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: { "Content-Type": 'application/json' },
-        Authorization: user
-      }
-      )
-        // const json = await response.json()
-        .then((res) => res.json())
-
-        .then((data) => {
-          console.log(data);
-          if (data.data === "Logged in") {
-            localStorage.setItem('token', data.token)
-            dispatch(userToken(data.token))
-            navigate('/')
+      const response = await axiosUserInstance.post('/login', values)
+        .then((response) => {
+          console.log(response);
+          if (response.data.data === "Logged in") {
+            localStorage.setItem('token', response.data.token)
+            dispatch(userToken(response.data.token))
+            navigate('/home')
             toast.success("Login Successfully")
 
-            console.log(data.token);
+            console.log(response.token);
           }
-          else if (data.error === "you were Blocked") {
-            console.log(data.data);
-            setValidation(data.data)
-            console.log(data.data);
+          else if (response.error === "you were Blocked") {
+            console.log(response.data);
+            setValidation(response.data)
+            console.log(response.data.data);
           }
-          else if (data.data === "Password Incorrect") {
-            setValidation(data.data)
+          else if (response.data === "Password Incorrect") {
+            setValidation(response.data.data)
 
-          } else if (data.data === "Invalid User") {
-            setValidation(data.status)
+          } else if (response.data === "Invalid User") {
+            setValidation(response.data.data)
 
           }
 
           dispatch(userLoginDetails(values))
+        }).catch((error) => {
+          toast.error(error.response.data.data)
+          setValidation(response.data)
         })
       action.resetForm();
     },
@@ -112,10 +106,15 @@ const Login = () => {
 
             </div>
 
+            {/* <div className='flex justify-between text-Blue-400 font-bold py-2'>
+              <p><input type="checkbox" />Remember Me</p>
+              <p> Forgot Password</p>
+            </div> */}
             <button className='w-full my-5 py-2 bg-blue-500 shadow-lg shadow-blue-500/65 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'
               type="submit">LogIn</button>
             <div className='flex  justify-center text-Blue-400 font-bold py-2'><p><Link to="/signup"> Create an account ? Register</Link></p></div>
             <div className='flex  justify-center text-Blue-400 font-bold py-2'><p><Link to="/DriverLogin"> DriverLogin</Link></p></div>
+
           </form>
         </div>
       </div>

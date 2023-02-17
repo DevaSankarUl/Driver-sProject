@@ -33,7 +33,8 @@ const OrderDetail = () => {
     }
   }
   async function pick(id) {
-    const driver = localStorage.getItem('adminToken');
+    const driver = localStorage.getItem('Drivertoken');
+    console.log(driver);
     const config = {
       headers: {
         Accept: 'application/json',
@@ -41,7 +42,7 @@ const OrderDetail = () => {
         'Content-Type': 'application/json'
       }
     }
-    const data = await axiosDriverInstance.post(`pick/${id}`, config)
+    const data = await axiosDriverInstance.post(`pick/${id}`, { data: null }, config)
     if (data) {
       displaydriver()
     }
@@ -56,7 +57,7 @@ const OrderDetail = () => {
         'Content-Type': 'application/json'
       }
     }
-    const data = await axiosDriverInstance.post(`drop/${id}`, config)
+    const data = await axiosDriverInstance.post(`drop/${id}`, { data: null }, config)
     if (data) {
       displaydriver()
     }

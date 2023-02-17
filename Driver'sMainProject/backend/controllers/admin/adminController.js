@@ -6,7 +6,6 @@ const product = require('../../app')
 const jwt = require('jsonwebtoken')
 const pickAndDrop = require('../../models/pickAndDrop')
 const { cloudinary } = require('../../utils/cloudinary');
-const { rmSync } = require('fs')
 const Product = require('../../models/adminProduct')
 const Driver = require('../../models/driverModel')
 const adminLogin = async (req, res) => {
@@ -28,16 +27,16 @@ const adminLogin = async (req, res) => {
                     password: adminValidation
                 }, 'secret12345')
                 let errMessage = "Logged in "
-                res.json({ data: errMessage, admintoken })
+                res.status(200).json({ data: errMessage, admintoken })
             } else {
                 console.log("Password Incorrect");
                 adminValidation.passErr = true
 
-                res.json({ status: "passwordWrong" })
+                res.status(400).json({ status: "passwordWrong" })
             }
         } else if (!adminValidation) {
             validation.invalidAdmin = true
-            res.json({ status: "Invalid admin" })
+            res.status(400).json({ status: "Invalid admin" })
         }
     }
     catch (error) {

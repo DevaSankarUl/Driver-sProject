@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 import { axiosUserInstance } from "../Axios/Axios";
 
 const PickAndDropOrderSummary = () => {
-    const [pick, setPick] = useState('')
-    // const order = useSelector((state) => state.admin.userpickAndDropDetails)
+    const [pick, setPick] = useState({})
+    const order = useSelector((state) => state.admin.userpickAndDropDetails)
     const driver = useSelector((state) => state.admin.expertDetails)
     const user = useSelector((state) => state.admin.userDetails)
-    // console.log(order);
-    // console.log("koppe", order.getpick[0].status);
+    // const length = order.getpick.length - 1
+    // console.log(order.getpick.length - 1);
+    // console.log("koppe", order.getpick[''].status);
 
     const summary = async () => {
         try {
@@ -20,8 +21,9 @@ const PickAndDropOrderSummary = () => {
     }
     return (
         <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
-            <div className="flex justify-start item-start space-y-2 flex-col ">
+            <div className="flex justify-start item-start space-y-2 flex-col "> 
                 <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800">
+                    {/* {order.getpick[length].status?order.getpick[length].status:''} */}
                     {/* {pick == 'pick' ?
                         (order.getpick[0].status == 'pick') :
                         pick == 'drop' ?
@@ -42,6 +44,7 @@ const PickAndDropOrderSummary = () => {
                             <div className="pb-4 md:pb-8 w-full md:w-40">
                                 <img className="w-full hidden md:block" src={driver.image} alt="Drivers Photo" />
                                 <img className="w-full md:hidden" src={driver.image} alt="dress" />
+
                             </div>
                             <div className="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full  pb-8 space-y-4 md:space-y-0">
                                 <div className="w-full flex flex-col justify-start items-start space-y-8">

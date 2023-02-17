@@ -98,7 +98,7 @@ const OrderDetail = ({ data }) => {
 
 
 
-  return <table><h1 >Orders</h1><DataTable columns={columns} data={approvel} pagination
+  return <table><h3>Orders</h3><DataTable columns={columns} data={approvel} pagination
   /></table>
 }
 

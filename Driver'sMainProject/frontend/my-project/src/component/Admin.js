@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 // import bgImg from '../assets/LoginPage .jpg'
-import { ErrorMessage, Formik, useFormik } from "formik"
+import { useFormik } from "formik"
 import { AdminSchema } from '../validation/adminSchema'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { admintoken } from './Redux/adminReducer'
+import { toast } from 'react-toastify';
+import { axiosAdminInstance } from '../Axios/Axios'
 const initialValues = {
   name: "",
   password: ""
@@ -13,39 +15,35 @@ const initialValues = {
 
 const Admin = () => {
   let navigate = useNavigate()
-  const dispatch =useDispatch()
+  const dispatch = useDispatch()
   const [validation, setValidation] = useState('')
+  console.log(validation);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: AdminSchema,
     onSubmit: async (values, action) => {
-      const response = await fetch('http://localhost:4000/api/admin/adminLog', {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: { "content-Type": 'application/json' }
-      })
+      const response = await axiosAdminInstance.post('/adminLog', values)
 
+        .then((response) => {
+          if (response.data.status === "passwordWrong") {
+            console.log(response.data.status);
 
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          if (data.status === "passwordWrong") {
-            console.log("passs");
-
-            setValidation(data.status)
-          } else if (data.status === "Invalid admin") {
+            setValidation(response.status)
+          } else if (response.data.status === "Invalid admin") {
             console.log("Cannot Login");
-            setValidation(data.status)
-          } else if (data.data === "Logged in ") {
-            dispatch(admintoken(data.admintoken))
-            console.log(data);
-            localStorage.setItem('admintoken', data.admintoken)
-            setValidation(data.status)
+            setValidation(response.data.status)
+          } else if (response.data.data === "Logged in ") {
+            dispatch(admintoken(response.data.admintoken))
+            localStorage.setItem('admintoken', response.data.admintoken)
+            setValidation(response.data.status)
             navigate('/adminDashboard')
-            
+            toast.success("Admin Loggedin Successfully")
           }
         })
-
+        .catch((error) => {
+          toast.error(error.response.data.status)
+          setValidation(response.data)
+        })
       action.resetForm();
     }
   })
@@ -53,9 +51,7 @@ const Admin = () => {
   return (
     <div>
       <div className='grid grid-cols-1 sm:grid-cols-1 h-screen w-full '>
-        {/* <div className="hidden sm:block"> */}
-        {/* <img className="bg-image " src={bgImg}></img> */}
-        {/* </div> */}
+
         <div className="bg-slate-700 text-zinc-700 flex flex-col justify-center">
           <form className="max-w-[400px]  w-full  mx-auto bg-slate-50 p-8 px-8 rounded-lg"
             onSubmit={handleSubmit}>

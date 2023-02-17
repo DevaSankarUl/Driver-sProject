@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { DriverLoginSchema } from '../validation/DriveLogSchema'
-import axios from 'axios'
+import { axiosDriverInstance } from '../Axios/Axios'
 import { useDispatch } from 'react-redux'
 import { DriverToken } from './Redux/adminReducer'
 import { toast } from 'react-toastify'
@@ -19,7 +19,7 @@ const DriverLogin = () => {
     initialValues: initialValues,
     validationSchema: DriverLoginSchema,
     onSubmit: async (values, action) => {
-      const response = await axios.post('http://localhost:4000/api/Driver/login', {
+      const response = await axiosDriverInstance.post('/login', {
         values
       })
         .then((response) => {
@@ -39,8 +39,9 @@ const DriverLogin = () => {
           }
         }).catch((error) => {
           console.log(error, "this is error")
-
-          toast.error(error.response.data.message)
+          // console.log(error.response.data.message);
+          toast.error(error.response.data.data)
+          setError(response.data.data)
         })
       action.resetForm();
     },
@@ -67,6 +68,7 @@ const DriverLogin = () => {
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur} />
+                {/* {errors.email && touched.email?(<p className='form-error text-black'>{errors.email}</p>):null} */}
               </div>
 
               <div className="mb-4 text-lg">

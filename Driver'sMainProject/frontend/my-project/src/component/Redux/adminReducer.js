@@ -52,13 +52,13 @@ const loginSlice = createSlice({
       adminDetails = false;
       return { ...state, adminDetails };
     },
-   
+
     userpickAndDropDetails: (state, action) => {
       let { userpickAndDropDetails } = state;
       userpickAndDropDetails = action.payload;
       return { ...state, userpickAndDropDetails }
     },
-    
+
     userToken: (state, action) => {
       let { userToken } = state;
       userToken = action.payload
@@ -89,12 +89,12 @@ const loginSlice = createSlice({
       userToken = false;
       return { ...state, userToken }
     },
-  bookingDetials:(state,action)=>{
-    let {booking} =state;
-    booking = action.payload
-    return {...state,booking}
-  },
-      clearbookingDetails: (state, action) => {
+    bookingDetials: (state, action) => {
+      let { booking } = state;
+      booking = action.payload
+      return { ...state, booking }
+    },
+    clearbookingDetails: (state, action) => {
       let { booking } = state;
       booking = false;
       return { ...state, booking }
@@ -117,6 +117,7 @@ export const {
   clearUserToken,
   categoryDetails,
   DriverToken,
+  clearDriverToken,
   admintoken,
   clearadminToken,
   userpickAndDropDetails,

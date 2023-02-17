@@ -1,15 +1,11 @@
 const User = require('../models/userModel')
 const pickAndDrop = require('../models/pickAndDrop')
 const Driver = require('../models/driverModel')
-// import adminModel from '../models/adminModel'
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const jwt_decode = require('jwt-decode')
-const sendMail = require('./sendMail')
 const { CLIENT_URL } = process.env
-const { networksecurity } = require('googleapis/build/src/apis/networksecurity')
 const Product = require('../models/adminProduct')
-// const SendmailTransport = require('nodemailer/lib/sendmail-transport')
 const Chat = require('../models/chatModel')
 
 
@@ -50,14 +46,14 @@ const loginUser = async (req, res) => {
                 validation.passErr = true
                 let errMessage = "Password Incorrect"
                 console.log("password Incorrect ")
-                res.json({ status: "Password Wrong", data: errMessage })
+                res.status(400).json({ status: "Password Wrong", data: errMessage })
                 // if(!isMatch) return res.status.json({mssg:"password is Incorrect"})
             }
 
         } else {
             validation.invalidUser = true || validation.blockStatus == true
             let errMessage = "Invalid User"
-            res.json({ status: "No Such User Exists", data: errMessage })
+            res.status(400).json({ status: "No Such User Exists", data: errMessage })
         }
 
     } catch (error) {

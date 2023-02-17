@@ -11,7 +11,7 @@ function AdminCarWashForm() {
     const [previewSource4, setPreviewSource4] = useState();
     const [fileInputState, setFileInputState] = useState('');
     const [error, setError] = useState('')
-   
+
 
     console.log("hey val", val);
     const handleFileInputChange1 = (e) => {
@@ -127,7 +127,7 @@ function AdminCarWashForm() {
 
     //         const response = await axiosAdminInstance.post('/carwash', formdata)
     //         console.log(response);
-            // reset()
+    // reset()
     //     } catch (err) {
     //         console.log();
     //     }

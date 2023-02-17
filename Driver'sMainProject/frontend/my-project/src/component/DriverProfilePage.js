@@ -8,6 +8,7 @@ import { axiosDriverInstance } from '../Axios/Axios'
 import jwt_decode from "jwt-decode";
 import { useDispatch } from 'react-redux'
 import { expertDetails } from './Redux/adminReducer'
+import { toast } from 'react-toastify';
 function DriverProfilePage() {
   const dispatch = useDispatch()
   const [ImageSelcted, setImageSelected] = useState()
@@ -28,9 +29,16 @@ function DriverProfilePage() {
         const decoded = jwt_decode(expertEmail);
 
         const url = response.data.url
-        // console.log(url);
+        const config = {
+          headers: {
+            Accept: 'application/json',
+            Authorization: expertEmail,
+            'Content-Type': 'application/json'
+          }
+        };
 
-        const res = await axiosDriverInstance.post('/photo-change', { url, email: decoded })
+        const res = await axiosDriverInstance.post('/photo-change', { url, email: decoded }, config)
+        toast.success("Image Updated Successfully")
         profile()
 
       })
@@ -38,16 +46,28 @@ function DriverProfilePage() {
 
   }
   const profile = async () => {
-    const decoded = jwt_decode(expertEmail);
-    // console.log("tokenDecode", decoded);
-    const changeImage = await axiosDriverInstance.post('/getDriver', { email: decoded })
-    // console.log("res after chanssssge :", changeImage)
-    const expert = changeImage.data.driver
-
-    // console.log("profilepicChange", expert);
-    setProfilePhoto(expert)
-    dispatch(expertDetails(expert))
+    try {
+      const decoded = jwt_decode(expertEmail);
+      // console.log("tokenDecode", decoded);
+      const config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: expertEmail,
+          'Content-Type': 'application/json'
+        }
+      };
+      const changeImage = await axiosDriverInstance.post('/getDriver', { email: decoded }, config)
+      const expert = changeImage.data.driver
+      setProfilePhoto(expert)
+      dispatch(expertDetails(expert))
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
+
+
+
   useEffect(() => {
     profile()
   }, [])
@@ -59,15 +79,12 @@ function DriverProfilePage() {
     <div classNmae='overscroll-y-none'>
       <DriverNavbar />
 
-      <div><button onClick={() => {
-        navigate('/order_details')
-      }
-      } class="absolute top-0 right-10 h-16 w-16  hover:bg-blue-700 rounded-md mt-10 ">ORDERS</button></div>
+
 
       <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"></link>
       <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"></link>
 
-      <section className="pt-10 bg-blueGray-50 ">
+      <section className="pt-4 bg-blueGray-50 ">
         <div className="w-full lg:w-4/12 px-4 mx-auto ">
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
             <div className="px-6">
@@ -99,7 +116,7 @@ function DriverProfilePage() {
                   </div>
                 </div>
               </div>
-              <div className="text-center mt-24">
+              <div className="text-center mt-12">
                 <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700">
 
                 </h3>
@@ -120,12 +137,12 @@ function DriverProfilePage() {
               <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-9/12 px-4">
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                    <i class="fa-solid fa-phone mr-2 ">
                       {profilePhoto.mobileNo}
-                    </p>
-                    <a href="javascript:void(0);" className="font-normal text-pink-500">
+                    </i>
+                    {/* <a href="javascript:void(0);" className="font-normal text-pink-500">
                       Show more
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { userAllDetails } from './Redux/adminReducer'
+import { axiosUserInstance } from '../Axios/Axios'
 const initialValues = {
   name: "",
   email: "",
@@ -24,7 +25,7 @@ const Signup = () => {
     initialValues: initialValues,
     validationSchema: signupSchema,
     onSubmit: async (values, action) => {
-      const response = await axios.post("http://localhost:4000/api/user/signup", {
+      const response = await axiosUserInstance.post("/signup", {
         values
         // method: "POST",
         // body: JSON.stringify(values),
@@ -147,21 +148,21 @@ const Signup = () => {
     //   </div>
     // </div>
     <div>
-      
+
       <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
         <div>
-          
-            <h3 className="text-4xl font-bold text-purple-600">SIGN UP
-              {/* <h1 className='text-3xl font-bold mr-4 text-emerald-300'>Commutor</h1> */}
-            </h3>
+
+          <h3 className="text-4xl font-bold text-purple-600">SIGN UP
+            {/* <h1 className='text-3xl font-bold mr-4 text-emerald-300'>Commutor</h1> */}
+          </h3>
 
         </div>
         <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
-        <div>
-        <img className="w-full h-full object-cover " src={bgImg} alt=''></img>
-      </div>
-           <form 
-             onSubmit={handleSubmit}>
+          <div>
+            <img className="w-full h-full object-cover " src={bgImg} alt=''></img>
+          </div>
+          <form
+            onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="name"
@@ -213,10 +214,10 @@ const Signup = () => {
                 className="block text-sm font-medium text-gray-700 undefined"
 
               >
-               Mobile No 
-              
+                Mobile No
+
               </label>
-           
+
               <input
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 type='number'
@@ -229,7 +230,7 @@ const Signup = () => {
                 onBlur={handleBlur} />
               {errors.mobileNo && touched.mobileNo ? (<p className='form-error text-red-500'>{errors.mobileNo}</p>) : null}
               <label htmlFor=""
-               className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-medium text-gray-700 undefined"
               >password</label>
 
               <div className="flex flex-col items-start">
@@ -264,7 +265,7 @@ const Signup = () => {
                   value={values.confirm_Password}
                   onChange={handleChange}
                   onBlur={handleBlur} />
-{errors.confirm_Password && touched.confirm_Password ? (<p className='form-error text-red-500'>{errors.confirm_Password}</p>) : null}
+                {errors.confirm_Password && touched.confirm_Password ? (<p className='form-error text-red-500'>{errors.confirm_Password}</p>) : null}
 
               </div>
             </div>

@@ -7,7 +7,6 @@ import Admin from './Pages/AdminPage'
 import DriverLogin from './component/DriverLogin'
 import DriverFormPage from './Pages/DriverSignup'
 import PickAndDropPage from './Pages/PickAndDropPage'
-// import OrderDetails from './Pages/OrderDetailPage'
 import CarWashPage from './Pages/CarWashPage'
 import CarwashBook from './component/carwashBook'
 import DriverProfilePage from './component/DriverProfilePage'
@@ -24,8 +23,7 @@ import NotFound from './Pages/NotFoundPage'
 import DriverProtector from './protectedRouter/AdminProtector'
 import DriverApprove from './Pages/OrderApprovePage'
 import PickDropOrderSummary from './Pages/PickDropOrder'
-import ServicePage from './Pages/servicePage'
-
+import Guest from './component/Guest'
 function App() {
   return (
     <div>
@@ -33,36 +31,36 @@ function App() {
       <Routes>
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
-        
+        <Route path='/' element={<Guest />} />
 
         <Route element={<ProtectRoute />}>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/home' element={<HomePage />} />
           <Route path='/pickAndDrop' element={<PickAndDropPage />} />
-        <Route path ='/services' element ={<servicePage/>}/>
+          <Route path='/services' element={<servicePage />} />
           <Route path='/CarWash' element={<CarWashPage />} />
           <Route path='/carwashBook' element={<CarwashBook />} />
           <Route path='/Carwashordersummary' element={<CarWashorderSummary />} />
           <Route path='/checkout-success' element={<CheckoutSuccessPage />} />
-          <Route path ='/PickAndDropOrderSummary' element={<PickDropOrderSummary/>}/>
+          <Route path='/PickAndDropOrderSummary' element={<PickDropOrderSummary />} />
         </Route>
         <Route path='/Driversignup' element={<DriverFormPage />} />
         <Route path='/DriverLogin' element={<DriverLogin />} />
         {/* <Route element={<ProtectRoute />}> */}
-          <Route path='/driver_profilePage' element={<DriverProfilePage />} />
-          <Route path = '/driver_approve' element={<DriverApprove/>}/>
+        <Route path='/driver_profilePage' element={<DriverProfilePage />} />
+        <Route path='/driver_approve' element={<DriverApprove />} />
         {/* </Route> */}
         {/* admin */}
         <Route path='/adminLogin' element={<Admin />} />
         <Route path='/order_details' element={<OrderDetail />} />
         <Route path='/adminAddProduct' element={<AddProduct />} />
-       <Route path = '/driverVerification' element={<DriverVerify/>}/>
-      <Route element={<DriverProtector/>}>
-      
-      <Route path='/adminDashboard' element={<AdmnLandingPage />} />
-        <Route path='/adminStatus' element={<UserTable />} />
+        <Route path='/driverVerification' element={<DriverVerify />} />
+        <Route element={<DriverProtector />}>
 
-        <Route path='/chat'  element={<ChatPage/>}/>
-        
+          <Route path='/adminDashboard' element={<AdmnLandingPage />} />
+          <Route path='/adminStatus' element={<UserTable />} />
+
+          <Route path='/chat' element={<ChatPage />} />
+
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>

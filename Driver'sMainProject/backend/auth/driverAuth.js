@@ -1,4 +1,5 @@
 const Driver = require("../models/driverModel");
+const jwt = require('jsonwebtoken')
 
 const authDriver = async (req, res, next) => {
     let drivertoken;
@@ -6,25 +7,26 @@ const authDriver = async (req, res, next) => {
         try {
             drivertoken = req.headers.authorization
 
-            const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
-            let driver=await Driver.findOne({_id:decoded._id})
-                if(!driver){
-                    throw new Error("User Not Found")
-           
-                }
-                req.driver = driver;
-                next()
-            
+            const decoded = jwt.verify(drivertoken, 'secret123')
+            console.log(decoded);
+            let driver = await Driver.findOne({ _id: decoded.email._id })
+            if (!driver) {
+                throw new Error("User Not Found")
+
+            }
+            req.driver = driver;
+            next()
+
         } catch (error) {
-            return res.status(500).json({msg: error.message})
+            return res.status(500).json({ msg: error.message })
         }
     }
     if (!drivertoken) {
-        return res.status(400).json({msg: "Invalid authentication."})
+        return res.status(400).json({ msg: "Invalid authentication." })
     }
 
 }
 
 module.exports = {
-authDriver
+    authDriver
 }

@@ -20,7 +20,7 @@ const DriverForm = () => {
     initialValues: initialValues,
     validationSchema: DriverSchema,
     onSubmit: async (values, action) => {
-      // console.log(values);
+
       const response = await axiosDriverInstance.post('/signupDriver', {
         values
 
@@ -28,7 +28,7 @@ const DriverForm = () => {
 
         .then((response) => {
           console.log(response);
-          // console.log(response.data.mssg);
+
           if (response.data.mssg === "Email Already Exists") {
             setError(response.data.mssg)
           } else {
