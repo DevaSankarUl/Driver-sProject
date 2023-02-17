@@ -2,7 +2,6 @@
 const admin = require('../../models/adminModel')
 const User = require('../../models/userModel')
 const adminHelpers = require('../../Heplers/adminHeplers')
-const product = require('../../app')
 const jwt = require('jsonwebtoken')
 const pickAndDrop = require('../../models/pickAndDrop')
 const { cloudinary } = require('../../utils/cloudinary');
